@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BallView">
+        <attr name="ball_bg" format="reference"/>
+        <attr name="bg" format="reference"/>
+    </declare-styleable>
+</resources>

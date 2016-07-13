@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_horizontal"
+              android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/tiger_mechine_bg_new"
+        android:divider="@drawable/separator"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:showDividers="middle">
+
+        <com.youzh.machineselection.BallView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@mipmap/wheel_divider"/>-->
+
+        <com.youzh.machineselection.BallView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@mipmap/wheel_divider"/>-->
+
+        <com.youzh.machineselection.BallView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@mipmap/wheel_divider"/>-->
+
+        <com.youzh.machineselection.BallView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@mipmap/wheel_divider"/>-->
+
+        <com.youzh.machineselection.BallView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@mipmap/wheel_divider"/>-->
+
+        <com.youzh.machineselection.BallView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@mipmap/wheel_divider"/>-->
+
+        <com.youzh.machineselection.BallView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ball_bg="@mipmap/ball_bg_blue"
+            app:bg="@mipmap/wheel_ball_blue_bg"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="5dp"
+        android:src="@drawable/anim_open_rock"/>
+</LinearLayout>
