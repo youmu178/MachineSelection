@@ -3,5 +3,6 @@
     <declare-styleable name="BallView">
         <attr name="ball_bg" format="reference"/>
         <attr name="bg" format="reference"/>
+        <attr name="isBule" format="boolean"></attr>
     </declare-styleable>
 </resources>

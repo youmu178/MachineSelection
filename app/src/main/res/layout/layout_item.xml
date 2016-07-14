@@ -20,61 +20,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@mipmap/wheel_divider"/>-->
+        <com.youzh.machineselection.BallView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <com.youzh.machineselection.BallView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@mipmap/wheel_divider"/>-->
+        <com.youzh.machineselection.BallView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <com.youzh.machineselection.BallView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@mipmap/wheel_divider"/>-->
-
         <com.youzh.machineselection.BallView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@mipmap/wheel_divider"/>-->
-
-        <com.youzh.machineselection.BallView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@mipmap/wheel_divider"/>-->
-
-        <com.youzh.machineselection.BallView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@mipmap/wheel_divider"/>-->
 
         <com.youzh.machineselection.BallView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:ball_bg="@mipmap/ball_bg_blue"
-            app:bg="@mipmap/wheel_ball_blue_bg"/>
+            app:bg="@mipmap/wheel_ball_blue_bg"
+            app:isBule="true"/>
 
     </LinearLayout>
 
