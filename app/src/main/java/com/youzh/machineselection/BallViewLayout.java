@@ -1,6 +1,7 @@
 package com.youzh.machineselection;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -21,9 +22,11 @@ public class BallViewLayout extends LinearLayout {
 
     @Bind(R.id.iv_open)
     ImageView mIvOpen;
-    private int mDuration = 0;
+    private int mAdDuration = 0;
     private AnimationDrawable mAnimDrawable;
     private ArrayList<BallView> mBallViewList = new ArrayList<>();
+    private ArrayList<Integer> mBallList = new ArrayList<>();
+    private int mDuration;
 
     public BallViewLayout(Context context) {
         this(context, null, 0);
@@ -35,6 +38,9 @@ public class BallViewLayout extends LinearLayout {
 
     public BallViewLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BallViewLayout);
+        mDuration = a.getInteger(R.styleable.BallViewLayout_duration, 2000);
+        a.recycle();
         View view = View.inflate(context, R.layout.layout_item, this);
         ButterKnife.bind(this, view);
     }
@@ -48,7 +54,7 @@ public class BallViewLayout extends LinearLayout {
         mAnimDrawable = (AnimationDrawable) mIvOpen.getDrawable();
 
         for (int i = 0; i < mAnimDrawable.getNumberOfFrames(); i++) {
-            mDuration += mAnimDrawable.getDuration(i);
+            mAdDuration += mAnimDrawable.getDuration(i);
         }
         mAnimDrawable.start();
         postDelayed(new Runnable() {
@@ -57,19 +63,41 @@ public class BallViewLayout extends LinearLayout {
                 mIvOpen.setImageResource(R.drawable.anim_stop_rock);
                 mAnimDrawable = (AnimationDrawable) mIvOpen.getDrawable();
                 mAnimDrawable.start();
-                mDuration = 0;
+                mAdDuration = 0;
             }
-        }, mDuration);
+        }, mAdDuration);
+
+        // 开始
         int count = 0;
         for (final BallView ballView : mBallViewList) {
             count += 100;
-            ballView.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    ballView.start();
-                }
-            }, count);
+            ballView.start(count);
         }
+
+        // 结束
+        BallView.randomBall(mBallList, 6, 33); // 双色球红球33机选6个
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int count = 0;
+                for (int i = 0; i < mBallViewList.size(); i++) {
+                    final BallView ballView = mBallViewList.get(i);
+                    count += 150;
+                    final int finalI = i;
+                    ballView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!ballView.isBuleBall()){
+                                String format = ballView.format.format(mBallList.get(finalI) + 1);
+                                ballView.stop(format);
+                            } else {
+                                ballView.stop(ballView.getRandomNum(ballView.isBuleBall()));
+                            }
+                        }
+                    }, count);
+                }
+            }
+        }, mDuration);
     }
 
     @Override

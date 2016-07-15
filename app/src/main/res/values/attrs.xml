@@ -5,4 +5,7 @@
         <attr name="bg" format="reference"/>
         <attr name="isBule" format="boolean"></attr>
     </declare-styleable>
+    <declare-styleable name="BallViewLayout">
+        <attr name="duration" format="integer"/>
+    </declare-styleable>
 </resources>

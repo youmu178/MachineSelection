@@ -7,7 +7,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -24,12 +23,11 @@ import java.util.Random;
 public class BallView extends LinearLayout {
 
     private TextView mTvBall;
-    private ArrayList<Integer> mBallList = new ArrayList<>();
-    private int mWidth;
     private int mHeight;
-    private Random random = new Random();
-    private DecimalFormat format = new DecimalFormat("00");
+    public static Random random = new Random();
+    public static DecimalFormat format = new DecimalFormat("00");
     private boolean isBule;
+    private ObjectAnimator loopAnimator;
 
     public BallView(Context context) {
         this(context, null, 0);
@@ -63,44 +61,55 @@ public class BallView extends LinearLayout {
         a.recycle();
     }
 
+    public boolean isBuleBall() {
+        return isBule;
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        Log.d("youzh", "width: " + getWidth() + " height: " + getHeight() +
-                " X: " + mTvBall.getPivotX() + " Y: " + mTvBall.getY());
-        mWidth = w;
         mHeight = h;
-
     }
 
-    public void start() {
+    public void start(long delay) {
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mTvBall, "translationY", 0, mHeight);
         objectAnimator.setDuration(300);
+        objectAnimator.setStartDelay(delay);
         objectAnimator.start();
         objectAnimator.addListener(new AnimatorListenerAdapter() {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mTvBall, "translationY", -mHeight, mHeight);
-                objectAnimator.setDuration(250);
-                objectAnimator.setRepeatMode(ValueAnimator.RESTART);
-                objectAnimator.setRepeatCount(-1);
-                objectAnimator.start();
-                objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                loopAnimator = ObjectAnimator.ofFloat(mTvBall, "translationY", -mHeight, mHeight);
+                loopAnimator.setDuration(300);
+                loopAnimator.setRepeatMode(ValueAnimator.RESTART);
+                loopAnimator.setRepeatCount(-1);
+                loopAnimator.start();
+                loopAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator animation) {
-                        setRandomNum(mTvBall, isBule);
+                        mTvBall.setText(getRandomNum(isBule));
                     }
                 });
-
             }
         });
     }
 
-    public void stop () {
-
-        
+    public void stop(final String numStr) {
+        if (loopAnimator.isRunning()) {
+            loopAnimator.cancel();
+            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mTvBall, "translationY", -mHeight, 0);
+            objectAnimator.setDuration(300);
+            objectAnimator.start();
+            objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    mTvBall.setText(numStr);
+                }
+            });
+        }
     }
+
     /**
      * 机选号码
      *
@@ -108,7 +117,7 @@ public class BallView extends LinearLayout {
      * @param num     机选几个
      * @param ballNum 在多少个数里选
      */
-    private void randomBall(ArrayList<Integer> list, int num, int ballNum) {
+    public static void randomBall(ArrayList<Integer> list, int num, int ballNum) {
         list.clear();
         Random random = new Random();
         boolean[] bool = new boolean[ballNum];
@@ -123,14 +132,16 @@ public class BallView extends LinearLayout {
         Collections.sort(list);
     }
 
-    private void setRandomNum(TextView tv, boolean isBule) {
+    public static String getRandomNum(boolean isBule) {
+        // 红球33个
         int ballNum = 33;
+        // 蓝球16个
         if (isBule) {
             ballNum = 16;
         }
         int i = random.nextInt(ballNum);
-        String format = this.format.format(i);
-        mTvBall.setText(format);
+        String str = format.format(i + 1);
+        return str;
     }
 
 }
